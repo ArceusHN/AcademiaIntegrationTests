@@ -9,9 +9,9 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest.Features.Personas.Data.
     {
         public CreatePersonaTheoryData()
         {
-            Add(new CreatePersonaRequest { Nombre = "Juan", Apellido = "Perez", Edad = 30, Sexo = 'M', Identidad="050100009812",Imagen = ObtenerImagen() }, (HttpStatusCode.OK, null));
-            Add(new CreatePersonaRequest { Nombre = "", Apellido = "Perez", Edad = 30, Sexo = 'M', Identidad="050100009812" ,Imagen = ObtenerImagen() }, (HttpStatusCode.BadRequest, PersonasValidacionMensajes.NombreRequerido));
-            Add(new CreatePersonaRequest { Nombre = "Juan", Apellido = "Perez", Edad = 0, Sexo = 'M', Identidad="050100009812", Imagen = ObtenerImagen() }, (HttpStatusCode.BadRequest, PersonasValidacionMensajes.EdadMayorACero));
+            Add(new CreatePersonaRequest { Nombre = "Juan", Apellido = "Perez", Edad = 30, Sexo = 'M', Identidad = "050100009812", Imagen = ObtenerImagen() }, (HttpStatusCode.OK, null));
+            Add(new CreatePersonaRequest { Nombre = "A", Apellido = "Perez", Edad = 30, Sexo = 'M', Identidad="050100009812" ,Imagen = ObtenerImagen() }, (HttpStatusCode.BadRequest, PersonasValidacionMensajes.NombreMinimoCaracteres));
+            Add(new CreatePersonaRequest { Nombre = "Gerardo", Apellido = "Perez", Edad = 0, Sexo = 'M', Identidad="050100009812", Imagen = ObtenerImagen() }, (HttpStatusCode.BadRequest, PersonasValidacionMensajes.EdadMayorACero));
         }
 
         private IFormFile ObtenerImagen()

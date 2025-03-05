@@ -18,6 +18,7 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest.Features.Personas
     {
         private readonly HttpClient _httpClient;
         private readonly IStorageService _storageServiceMock;
+        private const string baseUrl = "/api/Persona";
 
         public PersonasTests(CustomWebApplicationFactory<Program> factory)
         {
@@ -31,10 +32,9 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest.Features.Personas
         public async Task Dado_QueSeHanSembradoPersonas_CuandoSeInvocaElEndpointDePersona_Entonces_Retorna200YUnaColeccionDePersonasNoNula()
         {
             // Arrange
-            string url = "/api/Persona";
 
             //Act
-            var response = await _httpClient.GetAsync(url);
+            var response = await _httpClient.GetAsync(baseUrl);
 
             //Assert
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -51,7 +51,6 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest.Features.Personas
 
             StorageServiceMock.SetupError(_storageServiceMock);
 
-            string url = "/api/Persona";
 
             var request = new CreatePersonaRequest
             {
@@ -70,7 +69,7 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest.Features.Personas
 
             // Act
 
-            var response = await _httpClient.PostAsync(url, GetMultipartFormDataContent(request));
+            var response = await _httpClient.PostAsync(baseUrl, GetMultipartFormDataContent(request));
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
@@ -88,10 +87,9 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest.Features.Personas
         {
             // Arrange
             StorageServiceMock.SetupExitoso(_storageServiceMock);
-            string url = "/api/Persona";
 
             // Act
-            var response = await _httpClient.PostAsync(url, GetMultipartFormDataContent(request));
+            var response = await _httpClient.PostAsync(baseUrl, GetMultipartFormDataContent(request));
 
             // Assert
             response.StatusCode.Should().Be(expectedValues.expectedStatusCode);
