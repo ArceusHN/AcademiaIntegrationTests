@@ -1,6 +1,8 @@
-﻿using AcademiaIntegrationTestAndMock.Infrastructure.Persistence;
+﻿using AcademiaIntegrationTestAndMock.Common.Interfaces.Services;
+using AcademiaIntegrationTestAndMock.Infrastructure.Persistence;
 using AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Entities;
 using AcademiaIntegrationTestAndMock.IntegrationTest.Helpers;
+using AcademiaIntegrationTestAndMock.IntegrationTest.Mocks.Storage;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,7 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest
                 // Remover DbContext registro
                 services.RemoveService<ApplicationDbContext>();
                 services.RemoveService<DbConnection>();
+                services.RemoveService<IStorageService>();
 
                 services.AddSingleton<DbConnection>(sp =>
                 {
@@ -35,6 +38,8 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest
                     options.ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning));
                     options.UseSqlite(connection);
                 });
+
+                services.AddDefaultStorageServiceMock();
 
             });
         }

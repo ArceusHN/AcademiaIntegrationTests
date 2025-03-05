@@ -1,6 +1,8 @@
 ﻿using AcademiaIntegrationTestAndMock.Common.Interfaces.Repositories;
+using AcademiaIntegrationTestAndMock.Common.Interfaces.Services;
 using AcademiaIntegrationTestAndMock.Infrastructure.Persistence;
 using AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Repositories;
+using AcademiaIntegrationTestAndMock.Infrastructure.Storage;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcademiaIntegrationTestAndMock.Infrastructure
@@ -9,8 +11,9 @@ namespace AcademiaIntegrationTestAndMock.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddPersistence();
-
+            services.AddPersistence()
+                    .AddStorage();
+            
             return services;
         }
 
@@ -21,6 +24,12 @@ namespace AcademiaIntegrationTestAndMock.Infrastructure
 
             services.AddScoped<IPersonaRepository, PersonaRepository>();
 
+            return services;
+        }
+
+        private static IServiceCollection AddStorage(this IServiceCollection services)
+        {
+            services.AddScoped<IStorageService, StorageService>();
             return services;
         }
     }

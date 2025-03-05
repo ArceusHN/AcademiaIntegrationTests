@@ -11,10 +11,12 @@ namespace AcademiaIntegrationTestAndMock.Features.Personas
     {
         private readonly PersonasDomainService _personasDomainService;
         private readonly IPersonaRepository _personaRepository;
-        public PersonasAppService(IPersonaRepository personaRepository, PersonasDomainService personasDomainService)
+        private readonly IStorageService _storageService;
+        public PersonasAppService(IPersonaRepository personaRepository, PersonasDomainService personasDomainService, IStorageService storageService)
         {
             _personaRepository = personaRepository;
             _personasDomainService = personasDomainService;
+            _storageService = storageService;
         }
 
         public async Task<IEnumerable<PersonaResponse>> GetAllAsync()
@@ -35,8 +37,21 @@ namespace AcademiaIntegrationTestAndMock.Features.Personas
                 return ErrorOr<PersonaResponse>.From(resultValidation.Errors);
             }
 
+            ErrorOr<string> saveFileResult = await _storageService.SaveFileAsync(request.Imagen);
+
+            if (saveFileResult.IsError)
+            {
+                return ErrorOr<PersonaResponse>.From(saveFileResult.Errors);
+            }
+
+            persona.ImagenUrl = saveFileResult.Value;
+
             await _personaRepository.AddAsync(persona);
-            await _personaRepository.SaveChangesAsync();
+
+            if (!await _personaRepository.SaveChangesAsync())
+            {
+                return Error.Failure(PersonasValidacionMensajes.ErrorAlGuardarDatos);
+            }
 
             return persona.ToResponse();
         }

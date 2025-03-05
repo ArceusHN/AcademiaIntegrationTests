@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Migrations
+namespace AcademiaIntegrationTestAndMock.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250305065024_InitialCreate")]
+    [Migration("20250305162907_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -32,6 +32,13 @@ namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Migrations
 
                     b.Property<int>("Edad")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Identidad")
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImagenUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

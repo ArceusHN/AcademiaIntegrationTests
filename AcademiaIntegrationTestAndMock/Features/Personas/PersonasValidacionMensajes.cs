@@ -2,6 +2,7 @@
 {
     public static class PersonasValidacionMensajes
     {
+        public static string ErrorAlGuardarDatos => "Error al registrar la persona";
         public static string NombreRequerido => "El nombre es requerido";
         public static string ApellidoRequerido => "El apellido es requerido";
         public static string EdadRequerida => "La edad es requerida";

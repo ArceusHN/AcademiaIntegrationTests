@@ -29,6 +29,13 @@ namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Maps
             builder.Property(p => p.Sexo)
                 .IsRequired()
                 .HasMaxLength(1);
+
+            builder.Property(p => p.Identidad)
+                .IsRequired(false)
+                .HasMaxLength(20);
+
+            builder.Property(p => p.ImagenUrl)
+                   .IsRequired(false);
         }
     }
 }

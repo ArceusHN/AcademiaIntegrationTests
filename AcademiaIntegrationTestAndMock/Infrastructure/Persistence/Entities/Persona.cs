@@ -7,5 +7,7 @@
         public string Apellido { get; set; } = null!;
         public int Edad { get; set; }
         public char Sexo { get; set; }
+        public string Identidad { get; set; } = null!;
+        public string ImagenUrl { get; set; } = null!;
     }
 }

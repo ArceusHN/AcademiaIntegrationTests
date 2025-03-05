@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Migrations
+namespace AcademiaIntegrationTestAndMock.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -29,6 +29,13 @@ namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Migrations
 
                     b.Property<int>("Edad")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Identidad")
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImagenUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

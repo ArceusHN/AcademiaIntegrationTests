@@ -24,7 +24,8 @@ namespace AcademiaIntegrationTestAndMock.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] CreatePersonaRequest request)
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> CreateAsync([FromForm] CreatePersonaRequest request)
         {
             ErrorOr<PersonaResponse> resultado = await _personaApplicationService.CreateAsync(request);
 

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Migrations
+namespace AcademiaIntegrationTestAndMock.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -19,7 +19,9 @@ namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Migrations
                     Nombre = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Apellido = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Edad = table.Column<int>(type: "INTEGER", nullable: false),
-                    Sexo = table.Column<char>(type: "TEXT", maxLength: 1, nullable: false)
+                    Sexo = table.Column<char>(type: "TEXT", maxLength: 1, nullable: false),
+                    Identidad = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
+                    ImagenUrl = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
