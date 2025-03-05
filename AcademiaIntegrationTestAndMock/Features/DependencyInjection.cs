@@ -8,6 +8,7 @@ namespace AcademiaIntegrationTestAndMock.Features
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IPersonaApplicationService, PersonasAppService>();
+            services.AddScoped<PersonasDomainService, PersonasDomainService>();
 
             return services;
         }

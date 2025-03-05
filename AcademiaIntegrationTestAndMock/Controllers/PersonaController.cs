@@ -1,5 +1,7 @@
-﻿using AcademiaIntegrationTestAndMock.Common.Interfaces.Services;
+﻿using AcademiaIntegrationTestAndMock.Common.Extensions;
+using AcademiaIntegrationTestAndMock.Common.Interfaces.Services;
 using AcademiaIntegrationTestAndMock.Features.Personas.DTOs;
+using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademiaIntegrationTestAndMock.Controllers
@@ -22,9 +24,11 @@ namespace AcademiaIntegrationTestAndMock.Controllers
         }
 
         [HttpPost]
-        public async Task<PersonaResponse> CreateAsync([FromBody] CreatePersonaRequest request)
+        public async Task<IActionResult> CreateAsync([FromBody] CreatePersonaRequest request)
         {
-            return await _personaApplicationService.CreateAsync(request);
+            ErrorOr<PersonaResponse> resultado = await _personaApplicationService.CreateAsync(request);
+
+            return this.ActionResultFrom(resultado);
         }
     }
 }
