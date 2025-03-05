@@ -1,0 +1,18 @@
+@AcademiaIntegrationTestAndMock_HostAddress = http://localhost:5005
+
+### Obtener todas las personas
+GET {{AcademiaIntegrationTestAndMock_HostAddress}}/personas
+Accept: application/json
+
+###
+
+### Crear una nueva persona
+POST {{AcademiaIntegrationTestAndMock_HostAddress}}/personas
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Perez",
+  "edad": 30,
+  "sexo": "M"
+}

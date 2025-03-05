@@ -1,0 +1,39 @@
+## Archivos y carpetas generados por la compilación
+bin/
+obj/
+
+## Archivos y carpetas de ASP.NET Core
+wwwroot/
+
+## Archivos de configuración de usuario y temporales de Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+## Archivos y configuraciones de JetBrains Rider
+.idea/
+*.sln.iml
+
+## Paquetes NuGet y archivos relacionados
+*.nupkg
+# La carpeta packages puede ser ignorada si usas Package Restore
+**/packages/
+
+## Archivos de logs y directorios de depuración
+logs/
+*.log
+
+## Archivos generados de manera automática
+project.assets.json
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Otras configuraciones y herramientas
+# Directorio de herramientas .NET globales (opcional, según configuración)
+.dotnet/
+
+# Archivos de configuración de Docker (si aplica)
+docker-compose.override.yml
