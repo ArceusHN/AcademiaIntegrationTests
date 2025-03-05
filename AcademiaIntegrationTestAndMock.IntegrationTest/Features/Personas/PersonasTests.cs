@@ -91,7 +91,7 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest.Features.Personas
             string url = "/api/Persona";
 
             // Act
-            var response = await _httpClient.PostAsJsonAsync(url, request);
+            var response = await _httpClient.PostAsync(url, GetMultipartFormDataContent(request));
 
             // Assert
             response.StatusCode.Should().Be(expectedValues.expectedStatusCode);

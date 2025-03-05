@@ -1,6 +1,8 @@
-﻿using AcademiaIntegrationTestAndMock.Common.Interfaces.Services;
+﻿using AcademiaIntegrationTestAndMock.Common.Interfaces.Repositories;
+using AcademiaIntegrationTestAndMock.Common.Interfaces.Services;
 using AcademiaIntegrationTestAndMock.Infrastructure.Persistence;
 using AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Entities;
+using AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Repositories;
 using AcademiaIntegrationTestAndMock.IntegrationTest.Helpers;
 using AcademiaIntegrationTestAndMock.IntegrationTest.Mocks.Storage;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -20,24 +22,18 @@ namespace AcademiaIntegrationTestAndMock.IntegrationTest
             builder.ConfigureServices(services =>
             {
                 // Remover DbContext registro
-                services.RemoveService<ApplicationDbContext>();
-                services.RemoveService<DbConnection>();
+                services.RemoveDbContext<ApplicationDbContext>();
+                services.RemoveService<IPersonaRepository>();
                 services.RemoveService<IStorageService>();
 
-                services.AddSingleton<DbConnection>(sp =>
-                {
-                    var connection = new SqliteConnection("DataSource=:memory:");
-                    connection.Open();
-
-                    return connection;
-                });
 
                 services.AddDbContext<ApplicationDbContext>((container, options) =>
                 {
-                    var connection = container.GetRequiredService<DbConnection>();
+                    options.UseInMemoryDatabase(databaseName: "ApplicationDbContext");
                     options.ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning));
-                    options.UseSqlite(connection);
                 });
+
+                services.AddScoped<IPersonaRepository, PersonaRepository>();
 
                 services.AddDefaultStorageServiceMock();
 

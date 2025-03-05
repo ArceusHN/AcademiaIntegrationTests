@@ -31,11 +31,11 @@ namespace AcademiaIntegrationTestAndMock.Infrastructure.Persistence.Maps
                 .HasMaxLength(1);
 
             builder.Property(p => p.Identidad)
-                .IsRequired(false)
+                .IsRequired()
                 .HasMaxLength(20);
 
             builder.Property(p => p.ImagenUrl)
-                   .IsRequired(false);
+                   .IsRequired();
         }
     }
 }

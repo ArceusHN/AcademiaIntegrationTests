@@ -13,7 +13,8 @@ namespace AcademiaIntegrationTestAndMock.Features.Personas.Mappings
                 Nombre = persona.Nombre,
                 Apellido = persona.Apellido,
                 Edad = persona.Edad,
-                Sexo = persona.Sexo
+                Sexo = persona.Sexo,
+                Identidad = persona.Identidad,
             };
         }
 
@@ -29,7 +30,8 @@ namespace AcademiaIntegrationTestAndMock.Features.Personas.Mappings
                 Nombre = request.Nombre,
                 Apellido = request.Apellido,
                 Edad = request.Edad,
-                Sexo = request.Sexo
+                Sexo = request.Sexo,
+                Identidad = request.Identidad
             };
         }
     }
